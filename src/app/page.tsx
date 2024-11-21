@@ -138,12 +138,15 @@ export default function Home() {
             console.error('Smart account is not initialized')
             return
         }
+        const balance = await client.getBalance({ address: smartAccount.address })
+
         const code = await client.getCode({ address: smartAccount.address })
         console.log('code: ', code)
         if(!code) {
             setSmartAccountDetails({
                 isDeployed: false,
-                isFetched: true
+                isFetched: true,
+                balance: Number(balance)
             })
             return
         }
@@ -166,7 +169,6 @@ export default function Home() {
             owners.push(owner as string)
         }
 
-        const balance = await client.getBalance({ address: smartAccount.address })
 
         setSmartAccountDetails({
             isDeployed: true,
@@ -210,8 +212,8 @@ export default function Home() {
                 data: encodeFunctionData({
                     abi: CoinbaseSmartWalletAbi,
                     functionName: 'addOwnerAddress',
-                    // args: [ownerRecoveryAccount.address],
-                    args: ['0x53c603f21A212463c0F7C3C6C71B2b69CE40EC2d'],
+                    args: [ownerRecoveryAccount.address],
+                    // args: ['0x53c603f21A2124 63c0F7C3C6C71B2b69CE40EC2d'],
                 })
             }]
         // } else if(changeOwnerType === ChangeOwnerType.REMOVE) {
@@ -277,6 +279,7 @@ export default function Home() {
                         ) : (
                             <div>
                                 {smartAccountDetails.isFetched && <h3>Not deployed</h3>}
+                                {smartAccountDetails.balance != null && (<p>Balance:  {formatEther(smartAccountDetails.balance.toString())} ETH</p>)}
                             </div>
                         )}
                     </div>
