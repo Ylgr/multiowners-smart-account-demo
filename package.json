@@ -11,10 +11,15 @@
   "dependencies": {
     "@coinbase/wallet-sdk": "^4.2.3",
     "@passwordless-id/webauthn": "^2.1.2",
+    "@rainbow-me/rainbowkit": "^2.2.1",
+    "@tanstack/react-query": "^5.62.10",
+    "ethers": "^6.13.4",
     "next": "^15.0.3",
+    "notistack": "^3.0.1",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
-    "viem": "^2.21.45"
+    "viem": "^2.21.45",
+    "wagmi": "^2.14.6"
   },
   "devDependencies": {
     "@types/node": "^20",
